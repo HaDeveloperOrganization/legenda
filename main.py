@@ -11,6 +11,7 @@ grv_commands = ['-p', '-play', '-skip', '-stop', '-resume', '-volume']
 @client.event
 async def on_ready():
   print(f'We have logged in as {client}')
+  print('Tuli')
 
 @client.event
 async def on_message(message):
