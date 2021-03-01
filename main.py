@@ -11,7 +11,7 @@ grv_commands = ['-p', '-play', '-skip', '-stop', '-resume', '-volume']
 @client.event
 async def on_ready():
   print(f'We have logged in as {client}')
-  print('Tuli')
+  print('Peri')
 
 @client.event
 async def on_message(message):
@@ -27,11 +27,11 @@ async def on_message(message):
 
 
   if message.channel.id != joska_id and re.findall('[^\s]*',message.content.lower())[0] in grv_commands or message.content.lower() in grv_commands:
-
     await asyncio.sleep(2)
     await message.delete()
     await message.channel.send(f'Joskaba irjad a zenet te {message.author.mention}!')
-    await client.get_channel(joska_id).send(f'{message.author.mention} ezt kérte {stripped_music}')
+    if not message.content.lower() in grv_commands:
+      await client.get_channel(joska_id).send(f'{message.author.mention} ezt kérte {stripped_music}')
 
 
 
