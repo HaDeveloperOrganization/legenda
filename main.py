@@ -47,7 +47,7 @@ async def on_message(message):
 
   if message.channel.id != joska_id and message.author == client.user:
 
-    await asyncio.sleep(15)
+    await asyncio.sleep(20)
     await message.delete()
     
 
