@@ -57,10 +57,11 @@ async def on_message(message):
 
       await asyncio.sleep(2)
       await message.delete()
-      embed_warning=discord.Embed(description= 'Jóskába írjad a zenét', color=0x02547e)
+      embed_warning=discord.Embed(description= '<#815189981169319947>-ba írjad a zenét', color=0x02547e)
       embed_warning.set_author(name=message.author)
       embed_warning.set_thumbnail(url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
       await message.channel.send(embed=embed_warning)
+
 
 
 client.run(os.getenv('TOKEN'))
