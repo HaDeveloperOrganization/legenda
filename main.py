@@ -34,8 +34,8 @@ async def on_message(message):
     
     
     embed_display=discord.Embed(title=embed_content, url= embed_link, description= '', color=0x02547e)
-    embed_display.add_field(name=f'{embed_author.name} kérésére', value="󠀠󠀠󠀠:cd:", inline=True)    
-    embed_display.set_author(name="A következős nóta:", icon_url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
+    embed_display.add_field(name=f'__**{embed_author.name}**__ kérésére', value="󠀠󠀠󠀠:cd:", inline=True)    
+    embed_display.set_author(name="A következő nóta:", icon_url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
     embed_display.set_thumbnail(url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
 
     if message.channel.id != joska_id:
