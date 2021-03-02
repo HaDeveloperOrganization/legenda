@@ -4,6 +4,7 @@ import asyncio
 import re
 
 
+
 client = discord.Client()
 joska_id = 815189981169319947
 grv_commands = ['-p', '-play', '-skip', '-stop', '-resume', '-volume']
@@ -11,6 +12,7 @@ grv_commands = ['-p', '-play', '-skip', '-stop', '-resume', '-volume']
 @client.event
 async def on_ready():
   print(f'We have logged in as {client}')
+
   
 
 @client.event
@@ -32,9 +34,12 @@ async def on_message(message):
     
     
     embed_display=discord.Embed(title=embed_content, url= embed_link, description= '', color=0x02547e)
-    embed_display.set_author(name='A következő nóta:', url='')
-    embed_display.set_footer(text = f'{embed_author.name} kérésére')
-    await message.channel.send(embed=embed_display)
+    embed_display.add_field(name=f'{embed_author.name} kérésére', value="󠀠󠀠󠀠:cd:", inline=True)    
+    embed_display.set_author(name="A következős nóta:", icon_url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
+    embed_display.set_thumbnail(url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
+
+    if message.channel.id != joska_id:
+      await client.get_channel(joska_id).send(embed=embed_display)
     
  
 
