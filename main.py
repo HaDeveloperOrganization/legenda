@@ -2,8 +2,7 @@ import discord
 import os
 import asyncio
 import re
-from discord.ext import commands
-from discord.utils import get
+
 
 
 client = discord.Client()
@@ -14,7 +13,7 @@ grv_commands = ['-p', '-play', '-skip', '-stop', '-resume', '-volume']
 @client.event
 async def on_ready():
   print(f'We have logged in as {client}')
-  user = await client.fetch_user(224506156272451586)
+  
   
 
 @client.event
@@ -36,8 +35,9 @@ async def on_message(message):
     
     
     embed_display=discord.Embed(title=embed_content, url= embed_link, description= '', color=0x02547e)
-    embed_display.set_author(name='A következő nóta:', url='')
-    embed_display.set_footer(text = f'{embed_author.name} kérésére')
+    embed_display.add_field(name=f'{embed_author.name} kérésére', value="󠀠󠀠󠀠:cd:", inline=True)    
+    embed_display.set_author(name="A következős nóta:", icon_url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
+    embed_display.set_thumbnail(url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
     await message.channel.send(embed=embed_display)
     
  
