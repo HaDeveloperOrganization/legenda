@@ -28,7 +28,7 @@ async def on_message(message):
       embed_link = ''.join(re.findall('(?<=\()(http.*?)(?=\))', embed.to_dict()['description']))
       await message.delete()
 
-    print(embed_author_id)
+    
     
 
     
@@ -40,6 +40,8 @@ async def on_message(message):
 
     if message.channel.id != joska_id:
       await client.get_channel(joska_id).send(embed=embed_display)
+    elif message.channel.id == joska_id:
+      await message.channel.send(embed=embed_display)
     
  
 
@@ -50,14 +52,15 @@ async def on_message(message):
     
 
 
-  if message.channel.id != joska_id and re.findall('[^\s]*',message.content.lower())[0] in grv_commands or message.content.lower() in grv_commands:
+  if message.channel.id != joska_id:
+    if re.findall('[^\s]*',message.content.lower())[0] in grv_commands or message.content.lower() in grv_commands:
 
-    await asyncio.sleep(2)
-    await message.delete()
-    embed_warning=discord.Embed(description= 'Jóskába írjad a zenét', color=0x02547e)
-    embed_warning.set_author(name=message.author)
-    embed_warning.set_thumbnail(url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
-    await message.channel.send(embed=embed_warning)
+      await asyncio.sleep(2)
+      await message.delete()
+      embed_warning=discord.Embed(description= 'Jóskába írjad a zenét', color=0x02547e)
+      embed_warning.set_author(name=message.author)
+      embed_warning.set_thumbnail(url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
+      await message.channel.send(embed=embed_warning)
 
 
 client.run(os.getenv('TOKEN'))
