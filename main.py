@@ -7,7 +7,7 @@ import re
 
 client = discord.Client()
 joska_id = 815189981169319947
-grv_commands = ['-p', '-play', '-skip', '-stop', '-resume', '-volume']
+grv_commands = ['-p', '-play', '-skip', '-stop', '-resume', '-volume', '!add', '!add-playlist', '!clear-queue', '!play', '!skip', '!resume', '!replay', '!pause', '!stop']
 
 @client.event
 async def on_ready():
@@ -33,7 +33,9 @@ async def on_message(message):
       embed_warning.set_author(name='Figyelem', icon_url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
       embed_warning.set_thumbnail(url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
 
-  if message.author.id == 234395307759108106: #groovy's id
+      await message.channel.send(embed=embed_warning) #warns user to put command in music tc
+
+  if message.author.id == 234395307759108106 or message.author.id == 159985870458322944: #groovy's id
     
     for embed in message.embeds: 
       embed_content = re.findall('(?<=\[)(.*?)(?=\])',embed.to_dict()['description'])[0]
@@ -55,7 +57,7 @@ async def on_message(message):
       await message.channel.send(embed=embed_display)    
 
 
-      await message.channel.send(embed=embed_warning) #warns user to put command in music tc
+      
 
 
 
