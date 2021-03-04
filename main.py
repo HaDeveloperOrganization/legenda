@@ -4,7 +4,6 @@ import asyncio
 import re
 
 
-
 client = discord.Client()
 joska_id = 815189981169319947
 grv_commands = ['-p', '-play', '-skip', '-stop', '-resume', '-volume', '-clear', '!add', '!add-playlist', '!clear-queue', '!play', '!skip', '!resume', '!replay', '!pause', '!stop']
@@ -50,12 +49,13 @@ async def on_message(message):
     elif message.author.id == music_bot_ids['mee6_id']: #checks if bot is mee6
 
       try: #if it's the first song
-        
-        embed_content = re.findall('(?<=\[)(.*?)(?=\])',message.embeds[0].to_dict()['description'])
+      
+        embed_content = ''.join(re.findall('(?<=\[)(.*?)(?=\])',message.embeds[0].to_dict()['description']))
         embed_link = ''.join(re.findall('(?<=\()(http.*?)(?=\))', message.embeds[0].to_dict()['description']))
+        embed_author = message.embeds[0].to_dict()['footer']['text'][9:]
       except: #if something's already playing
         
-        embed_content = message.embeds[0].to_dict()['title']
+        embed_content = ''.join(message.embeds[0].to_dict()['title'])
         embed_link = message.embeds[0].to_dict()['url']
         embed_author = message.embeds[0].to_dict()['footer']['text'][9:]
 
