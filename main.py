@@ -2,11 +2,13 @@ import discord
 import os
 import asyncio
 import re
+from keep_alive import keep_alive
 
 
 client = discord.Client()
-joska_id = 815189981169319947
-grv_commands = ['-p', '-play', '-skip', '-stop', '-resume', '-volume', '-clear', '!add', '!add-playlist', '!clear-queue', '!play', '!skip', '!resume', '!replay', '!pause', '!stop']
+versmondo_id = 506459170472591361
+szerkesztoi_id = 430699631585001473
+bot_commands = ['-p', '-play', '-skip', '-stop', '-resume', '-volume', '-clear', '!add', '!add-playlist', '!clear-queue', '!play', '!skip', '!resume', '!replay', '!pause', '!stop']
 music_bot_ids = {'grv_id': 234395307759108106, 'mee6_id': 159985870458322944 }
 
 @client.event
@@ -18,18 +20,18 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
-  if message.channel.id != joska_id and message.author == client.user: #removes bot messages from non-music tc's
+  if message.channel.id != versmondo_id and message.author == client.user: #removes bot messages from non-music tc's
 
     await asyncio.sleep(20) 
     await message.delete()  
 
-  if message.channel.id != joska_id: #detects messages in non-music tc's
-    if re.findall('[^\s]*',message.content.lower())[0] in grv_commands or message.content.lower() in grv_commands: # checks if messages are commands
-      await asyncio.sleep(3)
+  if message.channel.id != versmondo_id and message.channel.id != szerkesztoi_id : #detects messages in non-music tc's
+    if re.findall('[^\s]*',message.content.lower())[0] in bot_commands or message.content.lower() in bot_commands: # checks if messages are commands
+    
       await message.delete() #removes commands from non music tc's
 
       #makes warning message
-      embed_warning=discord.Embed(description= f'<#815189981169319947>-ba írjad a zenét, kedves [{message.author.mention}]', color=0x02547e)
+      embed_warning=discord.Embed(description= f'Kérjük a <#506459170472591361> szobát használd ezekhez a parancsokhoz! [{message.author.mention}]', color=0x02547e)
       embed_warning.set_author(name='Figyelem', icon_url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
       embed_warning.set_thumbnail(url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
 
@@ -49,7 +51,7 @@ async def on_message(message):
     elif message.author.id == music_bot_ids['mee6_id']: #checks if bot is mee6
 
       try: #if it's the first song
-      
+
         embed_content = ''.join(re.findall('(?<=\[)(.*?)(?=\])',message.embeds[0].to_dict()['description']))
         embed_link = ''.join(re.findall('(?<=\()(http.*?)(?=\))', message.embeds[0].to_dict()['description']))
         embed_author = message.embeds[0].to_dict()['footer']['text'][9:]
@@ -68,14 +70,14 @@ async def on_message(message):
     embed_display.set_thumbnail(url="https://cms.sulinet.hu/get/d/e1109224-6b00-1700-5531-61727661746f/1/9/b/Normal/11_092_24_k_1_2_0_0.jpg")
 
     #only puts display embed in music tc
-    if message.channel.id != joska_id:
-      await client.get_channel(joska_id).send(embed=embed_display)
-    elif message.channel.id == joska_id:
+    if message.channel.id != versmondo_id:
+      await client.get_channel(versmondo_id).send(embed=embed_display)
+    elif message.channel.id == versmondo_id:
       await message.channel.send(embed=embed_display)    
 
 
       
 
 
-
+keep_alive()
 client.run(os.getenv('TOKEN'))
